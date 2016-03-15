@@ -20,18 +20,21 @@
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-          <!-- To be implemented when logged in.
-          <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin<span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                  {{#link-to 'admin.invitations' tagName="li"}}<a href="">Invitations</a>{{/link-to}}
-                  {{#link-to 'admin.contacts' tagName="li"}}<a href="">Contacts</a>{{/link-to}}
-              </ul>
-          </li>
-          <li><a href>Log out</a></li>
-        -->
-        {{#link-to 'members.login' tagName="li"}}<a href>Log in</a>{{/link-to}}
-        {{#link-to 'members.sign-up' tagName="li"}}<a href class="sign-up">Sign up</a>{{/link-to}}
+          {{#if loggedIn}}
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    {{#link-to 'admin.invitations' tagName="li"}}<a href="">Invitations</a>{{/link-to}}
+                    {{#link-to 'admin.contacts' tagName="li"}}<a href="">Contacts</a>{{/link-to}}
+                </ul>
+            </li>
+            <li><a href>Log out</a></li>
+        {{/if}}
+
+        {{#unless loggedIn}}
+          {{#link-to 'members.login' tagName="li"}}<a href>Log in</a>{{/link-to}}
+          {{#link-to 'members.sign-up' tagName="li"}}<a href class="sign-up">Sign up</a>{{/link-to}}
+        {{/unless}}
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
