@@ -4,6 +4,10 @@ body {
   padding-top: 20px;
 }
 
+.alert-success {
+    display: flex;
+}
+
 .ember-text-area {
   resize: vertical !important;
 }

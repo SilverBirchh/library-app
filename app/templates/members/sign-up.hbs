@@ -1,4 +1,7 @@
-<form action="" id="register-form" method="post" name="register-form" role="form" style="display: block;">
+{{#if responseMessage}}
+  <div class="alert alert-success">Your account has been set up. Please log in. {{#link-to 'members.login' tagName="p"}}<a href>&nbsp;Log in</a>{{/link-to}}</div>
+{{/if}}
+<form id="register-form" name="register-form" role="form" style="display: block;">
     <div class="form-group has-feedback {{if validUsername 'has-success'}}">
         {{input type="text" value=username id="username" tabindex="1" class="form-control" placeholder="Username" autofocus="autofocus"}}
         {{#if validUsername}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}}
@@ -14,7 +17,7 @@
     <div class="form-group">
         <div class="row">
             <div class="col-sm-6 col-sm-offset-3">
-                <input disabled={{isDisabled}} class="form-control btn btn-register" id=
+                <input {{action 'saveMember' model}} disabled={{isDisabled}} class="form-control btn btn-register" id=
                 "register-submit" name="register-submit" tabindex="4" type=
                 "submit" value="Register Now">
             </div>
