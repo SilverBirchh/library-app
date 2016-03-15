@@ -1,25 +1,20 @@
 <form action="" id="register-form" method="post" name="register-form" role="form" style="display: block;">
-    <div class="form-group">
-        <input class="form-control" id="username" name="username"
-        placeholder="Username" tabindex="1" type="text" value="">
+    <div class="form-group has-feedback {{if validUsername 'has-success'}}">
+        {{input type="text" value=username id="username" tabindex="1" class="form-control" placeholder="Username" autofocus="autofocus"}}
+        {{#if validUsername}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}}
     </div>
-    <div class="form-group">
-        <input class="form-control" id="email" name="email" placeholder=
-        "Email Address" tabindex="1" type="email" value="">
+    <div class="form-group has-feedback {{if validEmail 'has-success'}}">
+        {{input type="email" value=email id="email" tabindex="1" class="form-control" placeholder="Email Address" autofocus="autofocus"}}
+        {{#if validEmail}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}}
     </div>
-    <div class="form-group">
-        <input class="form-control" id="password" name="password"
-        placeholder="Password" tabindex="2" type="password">
-    </div>
-    <div class="form-group">
-        <input class="form-control" id="confirm-password" name=
-        "confirm-password" placeholder="Confirm Password" tabindex="2"
-        type="password">
+    <div class="form-group has-feedback {{if validPassword 'has-success'}}">
+        {{input type="password" value=password id="password" tabindex="2" class="form-control" placeholder="Password" autofocus="autofocus"}}
+        {{#if validPassword}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}}
     </div>
     <div class="form-group">
         <div class="row">
             <div class="col-sm-6 col-sm-offset-3">
-                <input class="form-control btn btn-register" id=
+                <input disabled={{isDisabled}} class="form-control btn btn-register" id=
                 "register-submit" name="register-submit" tabindex="4" type=
                 "submit" value="Register Now">
             </div>

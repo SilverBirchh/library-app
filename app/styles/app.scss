@@ -14,7 +14,7 @@ body {
   color: #ffffff !important;
 }
 
-.sign-up:hover, .sign-up:active, .sign-up:focus {
+.sign-up:hover:enabled, .sign-up:active:enabled, .sign-up:focus:enabled {
   background-color: #E30505 !important;
 }
 
@@ -69,8 +69,8 @@ body {
 	-moz-transition: all 0.1s linear;
 	transition: all 0.1s linear;
 }
-.panel-login input:hover,
-.panel-login input:focus {
+.panel-login input:hover:enabled,
+.panel-login input:focus:enabled {
 	outline:none;
 	-webkit-box-shadow: none;
 	-moz-box-shadow: none;
@@ -88,8 +88,8 @@ body {
 	text-transform: uppercase;
 	border-color: #59B2E6;
 }
-.btn-login:hover,
-.btn-login:focus {
+.btn-login:hover:enabled,
+.btn-login:focus:enabled {
 	color: #fff;
 	background-color: #53A3CD;
 	border-color: #53A3CD;
@@ -115,8 +115,8 @@ body {
 	text-transform: uppercase;
 	border-color: #1CB94A;
 }
-.btn-register:hover,
-.btn-register:focus {
+.btn-register:hover:enabled,
+.btn-register:focus:enabled {
 	color: #fff;
 	background-color: #1CA347;
 	border-color: #1CA347;
