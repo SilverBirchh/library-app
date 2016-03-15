@@ -1,0 +1,28 @@
+<div class="container">
+    	<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<div class="panel panel-login">
+					<div class="panel-heading">
+						<div class="row">
+							<div class="col-xs-6">
+                {{#link-to 'members.login' tagName="li"}}<a href {{action 'setLoginInActive' true}} class="{{if isLogin 'active'}}" id="login-form-link">Login</a>{{/link-to}}
+							</div>
+							<div class="col-xs-6">
+                {{#link-to 'members.sign-up' tagName="li"}}<a href {{action 'setLoginInActive' false}} class="{{unless isLogin 'active'}}" id="register-form-link">Sign up</a>{{/link-to}}
+							</div>
+						</div>
+						<hr>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-lg-12">
+
+                {{outlet}}
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

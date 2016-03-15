@@ -1,0 +1,13 @@
+<h2>List</h2>
+
+{{#each model as |feature|}}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{feature.name}}</h3>
+        </div>
+        <div class="panel-body">
+            <p>Description: {{feature.description}}</p>
+            <p>Contact: {{feature.contact}}</p>
+        </div>
+    </div>
+{{/each}}
