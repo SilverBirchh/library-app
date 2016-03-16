@@ -29,12 +29,11 @@
                 </ul>
             </li>
             <li><a href>Log out</a></li>
-        {{/if}}
 
-        {{#unless loggedIn}}
+        {{else}}
           {{#link-to 'members.login' tagName="li"}}<a href>Log in</a>{{/link-to}}
           {{#link-to 'members.sign-up' tagName="li"}}<a href class="sign-up">Sign up</a>{{/link-to}}
-        {{/unless}}
+        {{/if}}
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
