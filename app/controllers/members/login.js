@@ -14,15 +14,13 @@ export default Ember.Controller.extend({
 
   validateUser(username, password) {
     var ref = new Firebase("https://trading-app.firebaseio.com/members");
+    var canLogIn = false;
     var queryRef = ref.orderByChild("name").on("child_added", function(snapshot) {
       if (snapshot.val().name === username && snapshot.val().password === password) {
-        console.log("This client can log in");
-        console.log(snapshot.key() + " was " + snapshot.val().name + " " + snapshot.val().password);
-        return true;
+        canLogIn = true;
       }
-      return false;
     });
-    return queryRef;
+    return canLogIn;
   },
 
 actions: {
@@ -32,7 +30,7 @@ actions: {
       const password = this.get('password');
       if (this.validateUser(username, password) == true) {
         console.log("Continue");
-        this.transitionToRoute('features');
+        this.transitionToRoute('index');
       } else {
         console.log("Back off");
       }
