@@ -12,19 +12,30 @@ export default Ember.Controller.extend({
 
   isDisabled: Ember.computed.not('isValid'),
 
-  actions: {
+  validateUser(username, password) {
+    var ref = new Firebase("https://trading-app.firebaseio.com/members");
+    var queryRef = ref.orderByChild("name").on("child_added", function(snapshot) {
+      if (snapshot.val().name === username && snapshot.val().password === password) {
+        console.log("This client can log in");
+        console.log(snapshot.key() + " was " + snapshot.val().name + " " + snapshot.val().password);
+        return true;
+      }
+      return false;
+    });
+    return queryRef;
+  },
+
+actions: {
 
     login() {
       const username = this.get('username');
       const password = this.get('password');
-
-      var ref = new Firebase("https://trading-app.firebaseio.com/members");
-      ref.orderByChild("name").on("child_added", function(snapshot) {
-        if (snapshot.val().name === username && snapshot.val().password === password) {
-          console.log("This client can log in");
-          console.log(snapshot.key() + " was " + snapshot.val().name + " " + snapshot.val().password);
-        }
-      });
+      if (this.validateUser(username, password) == true) {
+        console.log("Continue");
+        this.transitionToRoute('features');
+      } else {
+        console.log("Back off");
+      }
     },
   },
 });
