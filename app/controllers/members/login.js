@@ -4,6 +4,9 @@ export default Ember.Controller.extend({
 
   username: '',
   password: '',
+  isResponseMessage: false,
+  responseMessage: '',
+
 
   validUsername: Ember.computed.gte('username.length', 5),
   validPassword: Ember.computed.match('password', /^[a-zA-Z]\w{3,14}$/),
@@ -28,11 +31,17 @@ actions: {
     login() {
       const username = this.get('username');
       const password = this.get('password');
-      if (this.validateUser(username, password) == true) {
-        console.log("Continue");
+      if (this.validateUser(username, password) === true) {
         this.transitionToRoute('index');
+        this.set('isResponseMessage', false);
+        this.set('responseMessage', ``);
       } else {
-        console.log("Back off");
+        this.set('isResponseMessage', true);
+        this.set('responseMessage', `<div class="alert alert-danger" role="alert">
+                                      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                        <span class="sr-only">Error:</span>
+                                          Enter a valid email address and password
+                                          </div>`);
       }
     },
   },
