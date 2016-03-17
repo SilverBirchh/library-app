@@ -16,12 +16,14 @@ Router.map(function() {
 
   this.route('features', function() {
     this.route('new');
+    this.route('edit', { path: '/:feature_id/edit' });
   });
 
   this.route('members', function() {
     this.route('login');
     this.route('sign-up');
   });
+  this.route('navbar');
 });
 
 export default Router;

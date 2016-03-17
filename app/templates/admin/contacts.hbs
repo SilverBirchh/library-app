@@ -13,7 +13,7 @@
         <tr>
             <th>{{feedback.id}}</th>
             <td>{{feedback.email}}</td>
-            <td>{{feedback.message}}</td>
+            <td>{{feedback.message}}<button class="btn btn-danger btn-xs pull-right" {{action 'deleteFeedback' feedback}}>Delete</button></td>
         </tr>
     {{/each}}
 
