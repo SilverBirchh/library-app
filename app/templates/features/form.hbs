@@ -1,0 +1,14 @@
+<h2>{{title}}</h2>
+
+<div class="row">
+    <div class="col-md-6">
+      {{feature-item-form item=model buttonLabel=buttonLabel action='saveFeature'}}
+    </div>
+
+    <div class="col-md-4">
+      {{#feature-item item=model}}
+        <br/>
+      {{/feature-item}}
+    </div>
+
+</div>
