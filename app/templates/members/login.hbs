@@ -1,4 +1,8 @@
-<form id="login-form" method="post" role="form" style="display: block;">
+{{#if isResponseMessage}}
+  {{{responseMessage}}}
+{{/if}}
+
+<form id="login-form" role="form" style="display: block;">
   <div class="form-group has-feedback {{if validUsername 'has-success'}}">
     {{input type="text" value=username id="username" tabindex="1" class="form-control" placeholder="Username" autofocus="autofocus"}}
     {{#if validUsername}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}}
@@ -14,7 +18,7 @@
   <div class="form-group">
     <div class="row">
       <div class="col-sm-6 col-sm-offset-3">
-        <input disabled={{isDisabled}} type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In">
+        <input {{action 'login' model}} disabled={{isDisabled}} type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In">
       </div>
     </div>
   </div>
