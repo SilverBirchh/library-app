@@ -23,7 +23,6 @@ Router.map(function() {
     this.route('login');
     this.route('sign-up');
   });
-  this.route('navbar');
 });
 
 export default Router;
