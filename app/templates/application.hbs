@@ -1,4 +1,10 @@
 <div class="container">
-  {{partial 'navbar'}}
-  {{outlet}}
+  {{partial 'navbar'}} {{outlet}}
+  {{#if session.isAuthenticated}}
+    <footer class="page-footer">
+      <p>
+        Logged in as {{session.currentUser.displayName}}
+      </p>
+    </footer>
+  {{/if}}
 </div>

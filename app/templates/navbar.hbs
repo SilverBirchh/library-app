@@ -18,7 +18,7 @@
         {{#link-to 'about' tagName="li" }}<a href>About</a>{{/link-to}}
         {{#link-to 'contact' tagName="li" }}<a href>Contact</a>{{/link-to}}
       </ul>
-      {{#if loggedIn}}
+      {{#if session.isAuthenticated}}
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
             <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" role="button">Admin<span class="caret"></span></a>
@@ -28,13 +28,14 @@
             </div>
           </li>
           <li>
-            <a href="">Log out</a>
+            <a href="#" {{action "signOut"}}>Sign out</a>
           </li>
         </ul>
       {{else}}
         <ul class="nav navbar-nav navbar-right" title="{{loggedIn}}">
-          {{#link-to 'members.login' tagName="li" }}<a href="">Log in</a>{{/link-to}}
-          {{#link-to 'members.sign-up' tagName="li" }}<a class="sign-up" href="">Sign up</a>{{/link-to}}
+          <li>
+            <a href="#" {{action "signIn" "google"}}>Sign in</a>
+          </li>
         </ul>
       {{/if}}
     </div>
