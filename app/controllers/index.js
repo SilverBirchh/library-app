@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 
-  headerMessage: 'Trading Platform Coming Soon',
+  headerMessage: 'Soar Trading. For the Greatest.',
 
   emailAddress: '',
   responseMessage: '',
