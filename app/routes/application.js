@@ -6,7 +6,7 @@ export default Ember.Route.extend({
     });
   },
 
-  adminId: 'google:105960574220142702485',
+  adminId: 'google:109846997750907639561',
   isAdmin: Ember.computed('adminId', function() {
     return this.get('session.uid') == this.get('adminId');
   }),
