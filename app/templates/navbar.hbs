@@ -33,9 +33,8 @@
         </ul>
       {{else}}
         <ul class="nav navbar-nav navbar-right">
-          <li>
-            <a href="#" {{action "signIn" "google"}}>Sign in</a>
-          </li>
+            {{#link-to 'members.login' tagName="li" }}<a href="">Login</a>{{/link-to}}
+            {{#link-to 'members.sign-up' tagName="li" }}<a href="">Sign up</a>{{/link-to}}
         </ul>
       {{/if}}
     </div>

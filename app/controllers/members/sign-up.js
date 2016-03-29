@@ -7,6 +7,8 @@ export default Ember.Controller.extend({
   password: '',
   responseMessage: false,
 
+  signUpLink: 'http://www.ig.com/uk/demo-account',
+
   validUsername: Ember.computed.gte('username.length', 5),
   validEmail: Ember.computed.match('email', /^.+@.+\..+$/),
   validPassword: Ember.computed.match('password', /^[a-zA-Z]\w{3,14}$/),
