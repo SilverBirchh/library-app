@@ -7,8 +7,7 @@ export default Ember.Controller.extend({
   password: '',
   isResponseMessage: false,
   responseMessage: '',
-  apiKey: config.APP.apiKey,
-
+  apiKey: config.APP.api.Key,
 
   validUsername: Ember.computed.gte('username.length', 5),
   validPassword: Ember.computed.match('password', /^[a-zA-Z]\w{3,14}$/),
@@ -21,7 +20,7 @@ export default Ember.Controller.extend({
 
     loginUser: function() {
       // Get username and password from user interface fields
-      var apiKey = this.get('apiKey');
+      var apiKey = config.APP.api.Key;
       var identifier = this.get('username');
       var password = this.get('password');
 
@@ -44,35 +43,25 @@ export default Ember.Controller.extend({
       req.body = JSON.stringify(bodyParams);
 
       // Send the request via a Javascript AJAX call
-      try {
-        $.ajax({
+      return new Ember.RSVP.Promise((resolve) => {
+        Ember.$.ajax({
           type: 'POST',
-          url: 'https://demo-api.ig.com/gateway/deal/session',
+          url: config.APP.api.session,
           data: req.body,
           headers: req.headers,
           async: false,
-          mimeType: req.binary ? 'text/plain; charset=x-user-defined' : null,
-          success: function(response, status, data) {
-
-            // Successful login
-            console.log("Login Successful");
-            // Extract account and client session tokens, active account id, and the Lightstreamer endpoint,
-            // as these will be required for subsequent requests
-            var account_token = data.getResponseHeader("X-SECURITY-TOKEN");
-            console.log("X-SECURITY-TOKEN: " + account_token);
-            var client_token = data.getResponseHeader("CST");
-            console.log("CST: " + client_token);
-          },
-          error: function(response, status, error) {
-
-            // Login failed, usually because the login id and password aren't correct
-            console.log(`You have an error ` + e + ' ' + response + ' ' + status);
-          }
+          mimeType: req.binary ? 'text/plain; charset=x-user-defined' : null
+        }).then(function(response, status, data) {
+          // Successful login
+          console.log("Login Successful");
+          var account_token = data.getResponseHeader("X-SECURITY-TOKEN");
+          console.log("X-SECURITY-TOKEN: " + account_token);
+          var client_token = data.getResponseHeader("CST");
+          console.log("CST: " + client_token);
+        }, function(e) {
+          console.log(e.responseText);
         });
-      } catch (e) {
-        console.log(`You have an error ` + e);
-      }
-      return true;
+      });
     }
   }
 });
