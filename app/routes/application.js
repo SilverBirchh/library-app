@@ -5,6 +5,23 @@ export default Ember.Route.extend({
       console.log("No Session");
     });
   },
+
+  adminId: 'google:109846997750907639561',
+  isAdmin: Ember.computed('adminId', function() {
+    return this.get('session.uid') == this.get('adminId');
+  }),
+
+  setupController(controller, model) {
+    this._super(controller, model);
+
+    controller.set('isAdmin', `${this.get('isAdmin')}`),
+
+    controller.set('footerText', `Logged in as
+      ${this.get('session.currentUser.displayName')}
+      with a unique ID of
+      ${this.get('session.uid')}`);
+  },
+
   actions: {
     signIn: function(provider) {
       console.log(provider + this.get("session"));
@@ -12,18 +29,19 @@ export default Ember.Route.extend({
         provider: provider
       }).then(function(data) {
         console.log(data.currentUser);
-        this.transitionTo('index');
       }, function(e) {
         console.log(e);
       }).catch(function(error) {
-        console.log('error' + error);
+        console.log('error ' + error);
       }).finally(function(done) {
-        console.log('fin' + done);
+        console.log('fin ' + done);
       });
       console.log(provider);
     },
     signOut: function() {
-      this.get("session").close();
+      this.get("session").close().catch(function(error) {
+        console.log('error ' + error);
+      });
     }
   }
 });

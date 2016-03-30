@@ -1,10 +1,6 @@
 <div class="container">
   {{partial 'navbar'}} {{outlet}}
   {{#if session.isAuthenticated}}
-    <div class="alert alert-success">
-      <p>
-        Logged in as {{session.currentUser.displayName}}
-      </p>
-    </div>
+    {{footer-nav footerText=footerText}}
   {{/if}}
 </div>

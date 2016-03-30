@@ -20,19 +20,19 @@
       </ul>
       {{#if session.isAuthenticated}}
         <ul class="nav navbar-nav navbar-right">
-          <li class="dropdown">
-            <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" role="button">Admin<span class="caret"></span></a>
-            <div class="dropdown-menu">
-              {{#link-to 'admin.invitations' tagName="li" }}<a href="">Invitations</a>{{/link-to}}
-              {{#link-to 'admin.contacts' tagName="li" }}<a href="">Contacts</a>{{/link-to}}
-            </div>
-          </li>
+            <li class="dropdown">
+              <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" role="button">Admin<span class="caret"></span></a>
+              <div class="dropdown-menu">
+                {{#link-to 'admin.invitations' tagName="li" }}<a href="">Invitations</a>{{/link-to}}
+                {{#link-to 'admin.contacts' tagName="li" }}<a href="">Contacts</a>{{/link-to}}
+              </div>
+            </li>
           <li>
             <a href="#" {{action "signOut"}}>Sign out</a>
           </li>
         </ul>
       {{else}}
-        <ul class="nav navbar-nav navbar-right" title="{{loggedIn}}">
+        <ul class="nav navbar-nav navbar-right">
           <li>
             <a href="#" {{action "signIn" "google"}}>Sign in</a>
           </li>
