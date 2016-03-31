@@ -18,7 +18,7 @@ export default Ember.Controller.extend({
 
   actions: {
 
-    loginUser: function() {
+    login: function() {
       // Get username and password from user interface fields
       var apiKey = config.APP.api.Key;
       var identifier = this.get('username');
@@ -44,24 +44,31 @@ export default Ember.Controller.extend({
       req.body = JSON.stringify(bodyParams);
 
       // Send the request via a Javascript AJAX call
-        Ember.$.ajax({
-          type: 'POST',
-          url: config.APP.api.session,
-          data: req.body,
-          headers: req.headers,
-          async: false,
-          mimeType: req.binary ? 'text/plain; charset=x-user-defined' : null
-        }).then(function(response, status, data) {
-          // Successful login
-          console.log('Successful login');
-          config.APP.api.securityToken = data.getResponseHeader("X-SECURITY-TOKEN");
-          config.APP.api.CST = data.getResponseHeader("CST");
-          config.APP.api.lsEndpoint = response.lightstreamerEndpoint;
-          config.APP.api.activeAccout = response.currentAccountId;
-          that.transitionToRoute('/search');
-        }, function(e) {
-          console.log(e.responseText);
-        });
+      Ember.$.ajax({
+        type: 'POST',
+        url: config.APP.api.session,
+        data: req.body,
+        headers: req.headers,
+        async: false,
+        mimeType: req.binary ? 'text/plain; charset=x-user-defined' : null
+      }).then(function(response, status, data) {
+        // Successful login
+        console.log('Successful login');
+        config.APP.api.securityToken = data.getResponseHeader("X-SECURITY-TOKEN");
+        sessionStorage.setItem('securityToken', config.APP.api.securityToken);
+
+        config.APP.api.CST = data.getResponseHeader("CST");
+        sessionStorage.setItem('CST', config.APP.api.CST);
+
+        config.APP.api.lsEndpoint = response.lightstreamerEndpoint;
+        sessionStorage.setItem('lsEndpoint', config.APP.api.lsEndpoint);
+
+        config.APP.api.activeAccout = response.currentAccountId;
+        sessionStorage.setItem('activeAccout', config.APP.api.activeAccout);
+        that.transitionToRoute('/search');
+      }, function(e) {
+        console.log(e.responseText);
+      });
     }
   }
 });
