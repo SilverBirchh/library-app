@@ -66,6 +66,7 @@ export default Ember.Controller.extend({
         config.APP.api.activeAccout = response.currentAccountId;
         sessionStorage.setItem('activeAccout', config.APP.api.activeAccout);
         that.transitionToRoute('/search');
+        location.reload();
       }, function(e) {
         console.log(e.responseText);
       });

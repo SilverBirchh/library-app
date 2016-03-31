@@ -30,7 +30,6 @@ module.exports = function(environment) {
         lsEndpoint: '',
         activeAccout: '',
       },
-      isLoggedIn: false,
     }
   };
 
