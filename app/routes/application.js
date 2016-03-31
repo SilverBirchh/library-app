@@ -24,4 +24,11 @@ export default Ember.Route.extend({
     });
   },
 
+  actions: {
+    signOut: function() {
+      sessionStorage.clear();
+      location.reload();
+    }
+  },
+
 });
