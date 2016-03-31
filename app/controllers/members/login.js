@@ -6,7 +6,7 @@ export default Ember.Controller.extend({
   username: '',
   password: '',
   isResponseMessage: false,
-  responseMessage: '',
+  responseMessage: 'Success',
   apiKey: config.APP.api.Key,
 
   validUsername: Ember.computed.gte('username.length', 5),
@@ -23,6 +23,7 @@ export default Ember.Controller.extend({
       var apiKey = config.APP.api.Key;
       var identifier = this.get('username');
       var password = this.get('password');
+      let that = this;
 
       var req = {};
 
@@ -43,7 +44,6 @@ export default Ember.Controller.extend({
       req.body = JSON.stringify(bodyParams);
 
       // Send the request via a Javascript AJAX call
-      return new Ember.RSVP.Promise((resolve) => {
         Ember.$.ajax({
           type: 'POST',
           url: config.APP.api.session,
@@ -53,15 +53,15 @@ export default Ember.Controller.extend({
           mimeType: req.binary ? 'text/plain; charset=x-user-defined' : null
         }).then(function(response, status, data) {
           // Successful login
-          console.log("Login Successful");
-          var account_token = data.getResponseHeader("X-SECURITY-TOKEN");
-          console.log("X-SECURITY-TOKEN: " + account_token);
-          var client_token = data.getResponseHeader("CST");
-          console.log("CST: " + client_token);
+          console.log('Successful login');
+          config.APP.api.securityToken = data.getResponseHeader("X-SECURITY-TOKEN");
+          config.APP.api.CST = data.getResponseHeader("CST");
+          config.APP.api.lsEndpoint = response.lightstreamerEndpoint;
+          config.APP.api.activeAccout = response.currentAccountId;
+          that.transitionToRoute('/search');
         }, function(e) {
           console.log(e.responseText);
         });
-      });
     }
   }
 });
