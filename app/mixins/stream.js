@@ -6,7 +6,7 @@ export default Ember.Mixin.create({
     console.log('Init streamer');
     // Instantiate Lightstreamer client instance
     let lsClient = new Lightstreamer.LightstreamerClient(config.APP.api.lsEndpoint, 'InVisionProvider');
-    console.log('lsclient retrieved');
+    console.log(lsClient);
     // Set up login credentials
     lsClient.connectionDetails.setUser(config.APP.api.activeAccout);
     lsClient.connectionDetails.setPassword("CST-" + config.APP.api.CST + "|XST-" + config.APP.api.securityToken);

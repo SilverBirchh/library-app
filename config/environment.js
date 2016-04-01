@@ -29,6 +29,7 @@ module.exports = function(environment) {
         securityToken: '',
         lsEndpoint: '',
         activeAccout: '',
+        lsClient: '',
       },
     }
   };
