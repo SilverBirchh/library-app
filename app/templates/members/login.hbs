@@ -1,5 +1,7 @@
-{{#if isResponseMessage}}
-  {{{responseMessage}}}
+{{#if hasResponseMessage}}
+  <div class="alert alert-danger text-center">
+     Invalid login. Please try again.
+  </div>
 {{/if}}
 
 <form id="login-form" role="form" style="display: block;">

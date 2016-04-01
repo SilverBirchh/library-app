@@ -1,7 +1,9 @@
 import Ember from 'ember';
 import config from '../config/environment';
+import stream from '../mixins/stream';
 
-export default Ember.Route.extend({
+
+export default Ember.Route.extend(stream, {
   isLoggedIn: '',
 
   beforeModel: function() {
@@ -15,6 +17,7 @@ export default Ember.Route.extend({
 
     this.set('isLoggedIn', config.APP.api.CST);
     console.log(this.get('isLoggedIn'));
+    this.startStream();
   },
 
   setupController(controller, model) {
@@ -27,6 +30,7 @@ export default Ember.Route.extend({
   actions: {
     signOut: function() {
       sessionStorage.clear();
+      this.set('isLoggedIn', null);
       location.reload();
     }
   },

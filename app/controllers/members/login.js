@@ -5,8 +5,7 @@ export default Ember.Controller.extend({
 
   username: '',
   password: '',
-  isResponseMessage: false,
-  responseMessage: 'Success',
+  hasResponseMessage: false,
   apiKey: config.APP.api.Key,
 
   validUsername: Ember.computed.gte('username.length', 5),
@@ -65,10 +64,13 @@ export default Ember.Controller.extend({
 
         config.APP.api.activeAccout = response.currentAccountId;
         sessionStorage.setItem('activeAccout', config.APP.api.activeAccout);
+        that.set('isLoggedIn', true);
         that.transitionToRoute('/search');
+        location.reload();
       }, function(e) {
+        that.set('hasResponseMessage', true);
         console.log(e.responseText);
-        
+
       });
     }
   }
