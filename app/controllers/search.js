@@ -76,7 +76,7 @@ export default Ember.Controller.extend({
               console.log('json: ' + confirm.dealId)
             });
           }
-        });  lsClient.subscribe(subscription);
+        });  config.APP.api.lsClient.subscribe(subscription);
       });
     }
   }

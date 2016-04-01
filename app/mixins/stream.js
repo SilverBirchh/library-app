@@ -6,15 +6,16 @@ export default Ember.Mixin.create({
     console.log('Init streamer');
     // Instantiate Lightstreamer client instance
     let lsClient = new Lightstreamer.LightstreamerClient(config.APP.api.lsEndpoint, 'InVisionProvider');
+    config.APP.api.lsClient = lsClient;
     console.log(lsClient);
     // Set up login credentials
-    lsClient.connectionDetails.setUser(config.APP.api.activeAccout);
-    lsClient.connectionDetails.setPassword("CST-" + config.APP.api.CST + "|XST-" + config.APP.api.securityToken);
+    config.APP.api.lsClient.connectionDetails.setUser(config.APP.api.activeAccout);
+    config.APP.api.lsClient.connectionDetails.setPassword("CST-" + config.APP.api.CST + "|XST-" + config.APP.api.securityToken);
 
     // Add connection event listener callback functions
     // Note: the Lightstreamer library will transparently attempt to reconnect a number of times
     // in the event of communicationss errors
-    lsClient.addListener({
+    config.APP.api.lsClient.addListener({
       onListenStart: function() {
         console.log('ListenStart');
       },
@@ -23,6 +24,6 @@ export default Ember.Mixin.create({
       }
     });
     // Connect to Lightstreamer
-    lsClient.connect();
+    config.APP.api.lsClient.connect();
   }
 });

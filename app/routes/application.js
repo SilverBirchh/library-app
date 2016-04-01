@@ -15,6 +15,8 @@ export default Ember.Route.extend(stream, {
 
     config.APP.api.activeAccout = sessionStorage.getItem('activeAccout') || null;
 
+    config.APP.api.lsClient = sessionStorage.getItem('lsClient') || null;
+
     this.set('isLoggedIn', config.APP.api.CST);
     console.log(this.get('isLoggedIn'));
     this.startStream();
