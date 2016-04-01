@@ -3,6 +3,7 @@ import config from '../config/environment';
 
 export default Ember.Controller.extend({
   market: '',
+  noMarketImage: 'assets/images/tumble.jpg',
   validSearch: Ember.computed.gte('market.length', 3),
   isDisabled: Ember.computed.not('validSearch'),
   results: [],
@@ -49,7 +50,9 @@ export default Ember.Controller.extend({
             } else {
               marketsData.state = 'assets/images/close.png';
             }
-            that.get('results').addObject(marketsData);
+            if (that.get('results').length < 39) {
+              that.get('results').addObject(marketsData);
+            }
           }
         },
         function(e) {
