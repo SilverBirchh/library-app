@@ -1,0 +1,56 @@
+<div id="search">
+	<hr />
+	<div class="row">
+		<div class="col-lg-6">
+			<div class="input-group">
+				<div class="form-group has-feedback {{if validSearch 'has-success'}}">
+					{{input type="text" value=market class="form-control" placeholder="Market" autofocus="autofocus"}}
+				</div>
+				<span class="input-group-btn">
+        <button {{action 'search'}} disabled={{isDisabled}} class="btn btn-default" type="button" id="search">Go!</button>
+      </span>
+			</div>
+			<!-- /input-group -->
+		</div>
+		<!-- /.col-lg-6 -->
+	</div>
+	<hr>
+	<div class="container col-lg-8">
+		<table class="table table-hover" id="search_results_list">
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Market</th>
+					<th>Expiry</th>
+					<th>Bid</th>
+					<th>Offer</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#each results as |result|}}
+					<tr>
+						<td>
+							<img id= {{result.linkIdState}} src= {{result.state}} />
+						</td>
+						<td id= {{result.linkIdEpic}}>
+							{{result.instrumentName}}
+						</td>
+						<td>
+							{{result.tidyExpiry}}
+						</td>
+						<td id= {{result.linkIdBid}}>
+							{{result.bid}}
+						</td>
+						<td id= {{result.linkIdOffer}}>
+							{{result.offer}}
+						</td>
+					</tr>
+					{{else}}
+						<td colspan="5" class="alert alert-warning col-sm-12 text-center">
+							No markets here.
+						</td>
+				{{/each}}
+			</tbody>
+		</table>
+	</div>
+</div>
