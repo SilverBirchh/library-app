@@ -33,7 +33,7 @@ export default Ember.Controller.extend({
 				mimeType: req.binary ? 'text/plain; charset=x-user-defined' : null
 			}).then(function(response, status, data) {
 				that.get('results').clear();
-
+				var streamingItems = [];
 				for (var i = 0; i < response.markets.length; i++) {
 					var marketsData = response.markets[i];
 					marketsData.tidyEpic = marketsData.epic.replace(/\./g, "_");
@@ -50,14 +50,18 @@ export default Ember.Controller.extend({
 					} else {
 						marketsData.state = 'assets/images/close.png';
 					}
+
 					if (that.get('results').length < 39) {
 						that.get('results').addObject(marketsData);
+						if (marketsData.streamingPricesAvailable) {
+							streamingItems.push("L1:" + marketsData.epic);
+						}
 					}
 				}
 				var subscription = new Lightstreamer.Subscription(
-					"MERGE", ["MARKET:IX.D.FTSE.DAILY.IP", "MARKET:MT.D.GC.MONTH1.IP"], // e.g. {"MARKET:IX.D.FTSE.DAILY.IP","MARKET:MT.D.GC.MONTH1.IP"}
-					["BID", "OFFER"] // e.g. {"BID", "OFFER"}
+					"MERGE", streamingItems, ["BID", "OFFER"]
 				);
+        subscription.setRequestedSnapshot("yes");
 				subscription.addListener({
 					onSubscription: function() {
 						console.log('subscribed');
@@ -70,8 +74,22 @@ export default Ember.Controller.extend({
 					},
 					onItemUpdate: function(updateInfo) {
 						var epic = updateInfo.getItemName().split(":")[1];
+						var tidyEpic = epic.replace(/\./g, "_");
 						updateInfo.forEachField(function(fieldName, fieldPos, value) {
-							console.log('Field: ' + fieldName + " Value: " + value);
+							let results = that.get('results');
+							let index = -1;
+							for (var i = 0; i < results.length; i++) {
+								if (results[i].tidyEpic === tidyEpic) {
+									index = i;
+								}
+							}
+							if (fieldName === 'OFFER') {
+								let obj = that.get("results").objectAt(index);
+								Ember.set(obj, "offer", value);
+							} else if (fieldName === 'BID') {
+								let obj = that.get("results").objectAt(index);
+								Ember.set(obj, "bid", value);
+							}
 						});
 					}
 				});
