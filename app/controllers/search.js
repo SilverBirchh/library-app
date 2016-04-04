@@ -1,7 +1,9 @@
 import Ember from 'ember';
 import config from '../config/environment';
+import findIndex from '../mixins/find-with-attr';
+import findClass from '../mixins/get-updated-class';
 
-export default Ember.Controller.extend({
+export default Ember.Controller.extend(findIndex, findClass, {
 	market: '',
 	noMarketImage: 'assets/images/tumble.jpg',
 	validSearch: Ember.computed.gte('market.length', 3),
@@ -77,29 +79,14 @@ export default Ember.Controller.extend({
 						var epic = updateInfo.getItemName().split(":")[1];
 						var tidyEpic = epic.replace(/\./g, "_");
 						updateInfo.forEachField(function(fieldName, fieldPos, value) {
-							let results = that.get('results');
-							let index = -1;
-							for (var i = 0; i < results.length; i++) {
-								if (results[i].tidyEpic === tidyEpic) {
-									index = i;
-								}
-							}
+							let index = that.findIndex(that.get('results'), 'tidyEpic', tidyEpic);
+              let obj = that.get("results").objectAt(index);
 							if (fieldName === 'OFFER') {
-								let obj = that.get("results").objectAt(index);
-                if (obj.offer > value) {
-                  var newClass = "updatedValueLower";
-                } else {
-                  var newClass = "updatedValueHigher";
-                }
+                var newClass = that.getNewClass(obj, 'offer', value);
 								Ember.set(obj, "offer", value);
 								var cell = document.getElementById(obj.linkIdOffer);
 							} else if (fieldName === 'BID') {
-								let obj = that.get("results").objectAt(index);
-                if (obj.bid > value) {
-                  var newClass = "updatedValueLower";
-                } else {
-                  var newClass = "updatedValueHigher";
-                }
+                var newClass = that.getNewClass(obj, 'bid', value);
 								Ember.set(obj, "bid", value);
 								var cell = document.getElementById(obj.linkIdBid);
 							}
