@@ -30,6 +30,7 @@ module.exports = function(environment) {
         lsEndpoint: '',
         activeAccout: '',
         lsClient: '',
+        subscription: '',
       },
     }
   };

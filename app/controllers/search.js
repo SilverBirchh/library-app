@@ -61,9 +61,13 @@ export default Ember.Controller.extend(findIndex, findClass, {
 						}
 					}
 				}
+				if (config.APP.api.subscription) {
+					config.APP.api.lsClient.unsubscribe(config.APP.api.subscription);
+				}
 				var subscription = new Lightstreamer.Subscription(
 					"MERGE", streamingItems, ["BID", "OFFER"]
 				);
+				config.APP.api.subscription = subscription;
 				subscription.setRequestedSnapshot("yes");
 				subscription.addListener({
 					onSubscription: function() {
@@ -80,13 +84,13 @@ export default Ember.Controller.extend(findIndex, findClass, {
 						var tidyEpic = epic.replace(/\./g, "_");
 						updateInfo.forEachField(function(fieldName, fieldPos, value) {
 							let index = that.findIndex(that.get('results'), 'tidyEpic', tidyEpic);
-              let obj = that.get("results").objectAt(index);
+							let obj = that.get("results").objectAt(index);
 							if (fieldName === 'OFFER') {
-                var newClass = that.getNewClass(obj, 'offer', value);
+								var newClass = that.getNewClass(obj, 'offer', value);
 								Ember.set(obj, "offer", value);
 								var cell = document.getElementById(obj.linkIdOffer);
 							} else if (fieldName === 'BID') {
-                var newClass = that.getNewClass(obj, 'bid', value);
+								var newClass = that.getNewClass(obj, 'bid', value);
 								Ember.set(obj, "bid", value);
 								var cell = document.getElementById(obj.linkIdBid);
 							}
