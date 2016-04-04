@@ -6,6 +6,7 @@ export default Ember.Controller.extend({
 	noMarketImage: 'assets/images/tumble.jpg',
 	validSearch: Ember.computed.gte('market.length', 3),
 	isDisabled: Ember.computed.not('validSearch'),
+	activeAccount: config.APP.api.activeAccout,
 	results: [],
 
 	actions: {
@@ -61,7 +62,7 @@ export default Ember.Controller.extend({
 				var subscription = new Lightstreamer.Subscription(
 					"MERGE", streamingItems, ["BID", "OFFER"]
 				);
-        subscription.setRequestedSnapshot("yes");
+				subscription.setRequestedSnapshot("yes");
 				subscription.addListener({
 					onSubscription: function() {
 						console.log('subscribed');
@@ -85,11 +86,29 @@ export default Ember.Controller.extend({
 							}
 							if (fieldName === 'OFFER') {
 								let obj = that.get("results").objectAt(index);
+                if (obj.offer > value) {
+                  var newClass = "updatedValueLower";
+                } else {
+                  var newClass = "updatedValueHigher";
+                }
 								Ember.set(obj, "offer", value);
+								var cell = document.getElementById(obj.linkIdOffer);
 							} else if (fieldName === 'BID') {
 								let obj = that.get("results").objectAt(index);
+                if (obj.bid > value) {
+                  var newClass = "updatedValueLower";
+                } else {
+                  var newClass = "updatedValueHigher";
+                }
 								Ember.set(obj, "bid", value);
+								var cell = document.getElementById(obj.linkIdBid);
 							}
+							cell.className += " " + newClass;
+
+							Ember.run.later((function() {
+								cell.className -= " " + newClass;
+							}), 500);
+
 						});
 					}
 				});
