@@ -10,7 +10,7 @@ export default Ember.Controller.extend({
   apiKey: config.APP.api.Key,
 
   validUsername: Ember.computed.gte('username.length', 5),
-  validapi: Ember.computed.gte('username.length', 15),
+  validapi: Ember.computed.gte('api.length', 15),
   validPassword: Ember.computed.match('password', /^[a-zA-Z]\w{3,14}$/),
 
   isValid: Ember.computed.and('validUsername', 'validPassword'),

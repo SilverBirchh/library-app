@@ -19,7 +19,7 @@ export default Ember.Controller.extend(findIndex, findClass, {
 			req.method = "GET";
 			req.url = "https://demo-api.ig.com/gateway/deal/markets?searchTerm=" + search;
 			req.headers = {
-				"X-IG-API-KEY": config.APP.api.Key,
+				"X-IG-API-KEY": config.APP.api.apiKey,
 				"X-SECURITY-TOKEN": config.APP.api.securityToken,
 				"CST": config.APP.api.CST,
 				"Content-Type": "application/json; charset=UTF-8",

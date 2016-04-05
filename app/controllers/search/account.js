@@ -60,7 +60,7 @@ export default Ember.Controller.extend({
 				async: false,
 				mimeType: req.binary ? 'text/plain; charset=x-user-defined' : null
 			}).then(function(response, status, data) {
-				console.log('Success');
+				console.log(response);
 			}, function(e) {
 				console.log(e);
 			});
