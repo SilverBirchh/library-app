@@ -23,6 +23,11 @@ Router.map(function() {
     this.route('login');
     this.route('sign-up');
   });
+  this.route('search', function() {
+    this.route('markets');
+    this.route('positions');
+    this.route('account');
+  });
 });
 
 export default Router;

@@ -18,24 +18,24 @@
         {{#link-to 'about' tagName="li" }}<a href>About</a>{{/link-to}}
         {{#link-to 'contact' tagName="li" }}<a href>Contact</a>{{/link-to}}
       </ul>
-      {{#if session.isAuthenticated}}
+      {{#if isLoggedIn}}
         <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
-              <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" role="button">Admin<span class="caret"></span></a>
-              <div class="dropdown-menu">
-                {{#link-to 'admin.invitations' tagName="li" }}<a href="">Invitations</a>{{/link-to}}
-                {{#link-to 'admin.contacts' tagName="li" }}<a href="">Contacts</a>{{/link-to}}
-              </div>
-            </li>
+          {{#link-to 'search' tagName="li" }}<a href>Trade</a>{{/link-to}}
+          <li class="dropdown">
+            <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" role="button">Admin<span class="caret"></span></a>
+            <div class="dropdown-menu">
+              {{#link-to 'admin.invitations' tagName="li" }}<a href="">Invitations</a>{{/link-to}}
+              {{#link-to 'admin.contacts' tagName="li" }}<a href="">Contacts</a>{{/link-to}}
+            </div>
+          </li>
           <li>
             <a href="#" {{action "signOut"}}>Sign out</a>
           </li>
         </ul>
       {{else}}
         <ul class="nav navbar-nav navbar-right">
-          <li>
-            <a href="#" {{action "signIn" "google"}}>Sign in</a>
-          </li>
+          {{#link-to 'members.login' tagName="li" }}<a href="">Login</a>{{/link-to}}
+          {{#link-to 'members.sign-up' tagName="li" }}<a href="">Sign up</a>{{/link-to}}
         </ul>
       {{/if}}
     </div>

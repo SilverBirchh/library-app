@@ -1,5 +1,5 @@
 module.exports = function(environment) {
-  var ENV = {
+    var ENV = {
     modulePrefix: 'library-app',
     environment: environment,
     contentSecurityPolicy: {
@@ -22,6 +22,16 @@ module.exports = function(environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
+      api: {
+        Key: 'ecdf28c91bbbb43b4ecdfb5491aa164dd3ea5246',
+        session: 'https://demo-api.ig.com/gateway/deal/session',
+        CST: '',
+        securityToken: '',
+        lsEndpoint: '',
+        activeAccout: '',
+        lsClient: '',
+        subscription: '',
+      },
     }
   };
 

@@ -1,47 +1,39 @@
 import Ember from 'ember';
-export default Ember.Route.extend({
-  beforeModel: function() {
-    return this.get("session").fetch().catch(function() {
-      console.log("No Session");
-    });
-  },
+import config from '../config/environment';
+import stream from '../mixins/stream';
 
-  adminId: 'google:109846997750907639561',
-  isAdmin: Ember.computed('adminId', function() {
-    return this.get('session.uid') == this.get('adminId');
-  }),
+
+export default Ember.Route.extend(stream, {
+  isLoggedIn: '',
+
+  beforeModel: function() {
+    config.APP.api.securityToken = sessionStorage.getItem('securityToken') || null;
+
+    config.APP.api.CST = sessionStorage.getItem('CST') || null;
+
+    config.APP.api.lsEndpoint = sessionStorage.getItem('lsEndpoint') || null;
+
+    config.APP.api.activeAccout = sessionStorage.getItem('activeAccout') || null;
+
+    config.APP.api.lsClient = sessionStorage.getItem('lsClient') || null;
+
+    this.set('isLoggedIn', config.APP.api.CST);
+    this.startStream();
+  },
 
   setupController(controller, model) {
     this._super(controller, model);
-
-    controller.set('isAdmin', `${this.get('isAdmin')}`),
-
-    controller.set('footerText', `Logged in as
-      ${this.get('session.currentUser.displayName')}
-      with a unique ID of
-      ${this.get('session.uid')}`);
+    controller.setProperties({
+      isLoggedIn: this.get('isLoggedIn'),
+    });
   },
 
   actions: {
-    signIn: function(provider) {
-      console.log(provider + this.get("session"));
-      this.get("session").open("firebase", {
-        provider: provider
-      }).then(function(data) {
-        console.log(data.currentUser);
-      }, function(e) {
-        console.log(e);
-      }).catch(function(error) {
-        console.log('error ' + error);
-      }).finally(function(done) {
-        console.log('fin ' + done);
-      });
-      console.log(provider);
-    },
     signOut: function() {
-      this.get("session").close().catch(function(error) {
-        console.log('error ' + error);
-      });
+      sessionStorage.clear();
+      this.set('isLoggedIn', null);
+      location.reload();
     }
-  }
+  },
+
 });

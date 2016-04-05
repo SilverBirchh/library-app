@@ -7,4 +7,8 @@ export default DS.Model.extend({
   contact: DS.attr('string'),
 
   isValid: Ember.computed.notEmpty('name'),
+
+  shouldReloadAll() {
+    return true;
+  },
 });

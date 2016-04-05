@@ -1,26 +1,3 @@
-{{#if responseMessage}}
-  <div class="alert alert-success">Your account has been set up. Please log in. {{#link-to 'members.login' tagName="p"}}<a href>&nbsp;Log in</a>{{/link-to}}</div>
-{{/if}}
-<form id="register-form" name="register-form" role="form" style="display: block;">
-    <div class="form-group has-feedback {{if validUsername 'has-success'}}">
-        {{input type="text" value=username id="username" tabindex="1" class="form-control" placeholder="Username" autofocus="autofocus"}}
-        {{#if validUsername}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}}
-    </div>
-    <div class="form-group has-feedback {{if validEmail 'has-success'}}">
-        {{input type="email" value=email id="email" tabindex="1" class="form-control" placeholder="Email Address" autofocus="autofocus"}}
-        {{#if validEmail}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}}
-    </div>
-    <div class="form-group has-feedback {{if validPassword 'has-success'}}">
-        {{input type="password" value=password id="password" tabindex="2" class="form-control" placeholder="Password" autofocus="autofocus"}}
-        {{#if validPassword}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}}
-    </div>
-    <div class="form-group">
-        <div class="row">
-            <div class="col-sm-6 col-sm-offset-3">
-                <input {{action 'saveMember' model}} disabled={{isDisabled}} class="form-control btn btn-register" id=
-                "register-submit" name="register-submit" tabindex="4" type=
-                "submit" value="Register Now">
-            </div>
-        </div>
-    </div>
-</form>
+<div class="alert alert-warning" role="alert">
+  To sign up please create an account at&nbsp;<a href={{signUpLink}} class="alert-link">{{signUpLink}}</a>
+</div>
