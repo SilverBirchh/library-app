@@ -4,9 +4,20 @@ import { module, test } from 'qunit';
 
 module('Unit | Mixin | get updated class');
 
-// Replace this with your real tests.
-test('it works', function(assert) {
+test('Higher class is retrieved', function(assert) {
   let GetUpdatedClassObject = Ember.Object.extend(GetUpdatedClassMixin);
   let subject = GetUpdatedClassObject.create();
-  assert.ok(subject);
+  let obj = {'bid': 123};
+  let value = 125;
+  let newClass = subject.getNewClass(obj, 'bid', value);
+  assert.equal('updatedValueHigher', newClass);
+});
+
+test('Lower class is retrieved', function(assert) {
+  let GetUpdatedClassObject = Ember.Object.extend(GetUpdatedClassMixin);
+  let subject = GetUpdatedClassObject.create();
+  let obj = {'bid': 123};
+  let value = 120;
+  let newClass = subject.getNewClass(obj, 'bid', value);
+  assert.equal('updatedValueLower', newClass);
 });

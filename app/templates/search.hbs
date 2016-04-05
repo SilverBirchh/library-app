@@ -1,6 +1,6 @@
+{{#if isLoggedIn}}
 <h1>Trading hub for {{activeAccount}}</h1>
 <div class="btn-toolbar">
-
   {{#link-to 'search.account' tagName="button" class="btn btn-primary dropdown-toggle" }}My Account{{/link-to}}
   {{#link-to 'search.positions' tagName="button" class="btn btn-primary dropdown-toggle" }}Open Positions{{/link-to}}
   {{#link-to 'search.markets' tagName="button" class="btn btn-primary dropdown-toggle" }}Search and Deal{{/link-to}}
@@ -17,3 +17,8 @@
   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
   <strong>Navigate</strong> through the platform using the sections above.
 </div>
+{{else}}
+<div class="alert alert-danger text-center" role="alert">
+  <strong>Please log in to view this page.</strong>
+</div>
+{{/if}}

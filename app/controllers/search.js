@@ -6,6 +6,7 @@ import findClass from '../mixins/get-updated-class';
 export default Ember.Controller.extend(findIndex, findClass, {
 
 	activeAccount: config.APP.api.activeAccout,
+	isLoggedIn: config.APP.api.activeAccout,
 
 	actions: {
 
