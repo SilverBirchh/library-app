@@ -7,7 +7,7 @@ export default Ember.Controller.extend({
   password: '',
   api: '',
   hasResponseMessage: false,
-  apiKey: config.APP.api.Key,
+  apiKey: '',
 
   validUsername: Ember.computed.gte('username.length', 5),
   validapi: Ember.computed.gte('api.length', 15),
@@ -22,8 +22,8 @@ export default Ember.Controller.extend({
     login: function() {
       // Get username and password from user interface fields
       var apiKey = this.get('api');
-      config.APP.api.key = apiKey;
-      sessionStorage.setItem('apikey', config.APP.api.key);
+      config.APP.api.Key = apiKey;
+      sessionStorage.setItem('apikey', config.APP.api.Key);
       var identifier = this.get('username');
       var password = this.get('password');
       let that = this;

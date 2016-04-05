@@ -15,11 +15,12 @@ export default Ember.Controller.extend(findIndex, findClass, {
 		search() {
 			const that = this;
 			let search = this.get('market').replace(/[^\w\s]/gi, '');
+			
 			var req = {};
 			req.method = "GET";
 			req.url = "https://demo-api.ig.com/gateway/deal/markets?searchTerm=" + search;
 			req.headers = {
-				"X-IG-API-KEY": config.APP.api.apiKey,
+				"X-IG-API-KEY": config.APP.api.Key,
 				"X-SECURITY-TOKEN": config.APP.api.securityToken,
 				"CST": config.APP.api.CST,
 				"Content-Type": "application/json; charset=UTF-8",

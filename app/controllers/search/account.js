@@ -48,7 +48,7 @@ export default Ember.Controller.extend({
 			req.headers = {
 				"Content-Type": "application/json; charset=UTF-8",
 				"Accept": "application/json; charset=UTF-8",
-				"X-IG-API-KEY": config.APP.api.key,
+				"X-IG-API-KEY": config.APP.api.Key,
 				"CST": config.APP.api.CST,
 				"X-SECURITY-TOKEN":config.APP.api.securityToken,
 				"Version": "1"
