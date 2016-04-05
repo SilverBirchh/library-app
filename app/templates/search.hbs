@@ -1,8 +1,17 @@
 <h1>Trading hub for {{activeAccount}}</h1>
 <div class="btn-toolbar">
 
-  {{#link-to 'search.account' tagName="button" class="btn btn-primary dropdown-toggle"}}My Account{{/link-to}}
-  {{#link-to 'search.positions' tagName="button" class="btn btn-primary dropdown-toggle"}}Open Positions{{/link-to}}
-  {{#link-to 'search.markets' tagName="button" class="btn btn-primary dropdown-toggle"}}Search and Deal{{/link-to}}
+  {{#link-to 'search.account' tagName="button" class="btn btn-primary dropdown-toggle" }}My Account{{/link-to}}
+  {{#link-to 'search.positions' tagName="button" class="btn btn-primary dropdown-toggle" }}Open Positions{{/link-to}}
+  {{#link-to 'search.markets' tagName="button" class="btn btn-primary dropdown-toggle" }}Search and Deal{{/link-to}}
 </div>
 {{outlet}}
+<hr>
+<div class="alert alert-info text-center" role="alert">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <strong>Welcome back!</strong> We hope that you enjoy using our platform.
+</div>
+<div class="alert alert-info text-center" role="alert">
+  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <strong>Navigate</strong> through the platform using the sections above.
+</div>
