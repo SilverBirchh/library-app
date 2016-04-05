@@ -27,6 +27,7 @@ export default Ember.Controller.extend({
 				async: false,
 				mimeType: req.binary ? 'text/plain; charset=x-user-defined' : null
 			}).then(function(response, status, data) {
+				that.get('results').clear();
 				console.log(response);
 				for (var i = 0; i < response.accounts.length; i++) {
 					that.get('results').addObject(response.accounts[i]);
