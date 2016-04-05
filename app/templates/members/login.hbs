@@ -13,6 +13,10 @@
     {{input type="password" value=password id="password" tabindex="2" class="form-control" placeholder="Password" autofocus="autofocus"}}
     {{#if validPassword}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}}
   </div>
+  <div class="form-group has-feedback {{if validapi 'has-success'}}">
+    {{input type="text" value=api id="api" tabindex="2" class="form-control" placeholder="API Key" autofocus="autofocus"}}
+    {{#if validapi}}<span class="glyphicon glyphicon-ok form-control-feedback"></span>{{/if}}
+  </div>
   <div class="form-group">
     <div class="row">
       <div class="col-sm-6 col-sm-offset-3">

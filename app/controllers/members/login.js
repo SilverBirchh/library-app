@@ -5,10 +5,12 @@ export default Ember.Controller.extend({
 
   username: '',
   password: '',
+  api: '',
   hasResponseMessage: false,
   apiKey: config.APP.api.Key,
 
   validUsername: Ember.computed.gte('username.length', 5),
+  validapi: Ember.computed.gte('username.length', 15),
   validPassword: Ember.computed.match('password', /^[a-zA-Z]\w{3,14}$/),
 
   isValid: Ember.computed.and('validUsername', 'validPassword'),
@@ -19,7 +21,7 @@ export default Ember.Controller.extend({
 
     login: function() {
       // Get username and password from user interface fields
-      var apiKey = config.APP.api.Key;
+      var apiKey = this.get('api');
       var identifier = this.get('username');
       var password = this.get('password');
       let that = this;
@@ -65,12 +67,11 @@ export default Ember.Controller.extend({
         config.APP.api.activeAccout = response.currentAccountId;
         sessionStorage.setItem('activeAccout', config.APP.api.activeAccout);
         that.set('isLoggedIn', true);
-        that.transitionToRoute('/search');
+        that.transitionToRoute('/search/account');
         location.reload();
       }, function(e) {
         that.set('hasResponseMessage', true);
         console.log(e.responseText);
-
       });
     }
   }
