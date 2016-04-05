@@ -5,5 +5,6 @@ export default Ember.Route.extend({
 		this._super(controller, model);
 		var controller = this.controllerFor('search/account');
 		controller.send('getAcountDetails');
+		controller.send('getAllAccountDetails');
 	},
 });

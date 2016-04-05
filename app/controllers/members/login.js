@@ -22,6 +22,8 @@ export default Ember.Controller.extend({
     login: function() {
       // Get username and password from user interface fields
       var apiKey = this.get('api');
+      config.APP.api.key = apiKey;
+      sessionStorage.setItem('apikey', config.APP.api.key);
       var identifier = this.get('username');
       var password = this.get('password');
       let that = this;

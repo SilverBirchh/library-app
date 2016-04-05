@@ -38,6 +38,32 @@ export default Ember.Controller.extend({
 				}
 			});
 			config.APP.api.lsClient.subscribe(subscription);
+		},
+
+		getAllAccountDetails() {
+			console.log('init all acc details');
+			let that = this;
+			var req = {};
+
+			req.headers = {
+				"Content-Type": "application/json; charset=UTF-8",
+				"Accept": "application/json; charset=UTF-8",
+				"X-IG-API-KEY": config.APP.api.key,
+				"CST": config.APP.api.CST,
+				"X-SECURITY-TOKEN":config.APP.api.securityToken,
+				"Version": "1"
+			};
+			Ember.$.ajax({
+				type: 'GET',
+				url: 'https://demo-api.ig.com/gateway/deal/accounts',
+				headers: req.headers,
+				async: false,
+				mimeType: req.binary ? 'text/plain; charset=x-user-defined' : null
+			}).then(function(response, status, data) {
+				console.log('Success');
+			}, function(e) {
+				console.log(e);
+			});
 		}
 	}
 });

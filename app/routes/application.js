@@ -17,6 +17,8 @@ export default Ember.Route.extend(stream, {
 
     config.APP.api.lsClient = sessionStorage.getItem('lsClient') || null;
 
+    config.APP.api.key = sessionStorage.getItem('apikey') || null;
+
     this.set('isLoggedIn', config.APP.api.CST);
     this.startStream();
   },
