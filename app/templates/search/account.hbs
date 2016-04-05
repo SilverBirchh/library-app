@@ -4,44 +4,34 @@
 		<h3 class="panel-title">Account Details</h3>
 	</div>
 	<div class="panel-body">
-		<p>
-			Account Id: <strong>{{account.ID}}</strong>
-		</p>
-		<table class="table">
-			<tbody>
-				<tr>
-					<td>
-						Equity:
-					</td>
-					<td>
-						<strong>£{{account.EQUITY}}</strong>
-					</td>
-					<td>
-						Profit / Loss:
-					</td>
-					<td>
-						<strong>£{{account.PNL}}</strong>
-					</td>
-					<td>
-						Funds:
-					</td>
-					<td>
-						<strong>£{{account.FUNDS}}</strong>
-					</td>
-					<td>
-						Margin:
-					</td>
-					<td>
-						<strong>£{{account.MARGIN}}</strong>
-					</td>
-					<td>
-						Avaliable to Deal:
-					</td>
-					<td>
-						<strong>£{{account.AVAILABLE_TO_DEAL}}</strong>
-					</td>
-				</tr>
-			</tbody>
-		</table>
+		{{#each results as |result|}}
+			<p>
+				Account Id: <strong>{{result.accountId}}</strong> - Type: {{result.accountType}}{{#if result.preferred}} - Preferred{{/if}}
+			</p>
+			<table class="table">
+				<tbody>
+					<tr>
+						<td>
+							Balance:
+						</td>
+						<td>
+							<strong>£{{result.balance.balance}}</strong>
+						</td>
+						<td>
+							Avaliable to Deal:
+						</td>
+						<td>
+							<strong>£{{result.balance.available}}</strong>
+						</td>
+						<td>
+							Profit / Loss:
+						</td>
+						<td>
+							<strong>£{{result.balance.profitLoss}}</strong>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		{{/each}}
 	</div>
 </div>

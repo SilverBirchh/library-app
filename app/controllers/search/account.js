@@ -4,14 +4,7 @@ import config from '../../config/environment';
 
 export default Ember.Controller.extend({
 	activeAccount: config.APP.api.activeAccout,
-	account: {
-		'ID': '',
-		'EQUITY': 'NA',
-		'PNL': 'NA',
-		'FUNDS': 'NA',
-		'MARGIN': 'NA',
-		'AVAILABLE_TO_DEAL': 'NA'
-	},
+	results: [],
 
 	actions: {
 		getAllAccountDetails() {
@@ -24,7 +17,7 @@ export default Ember.Controller.extend({
 				"Accept": "application/json; charset=UTF-8",
 				"X-IG-API-KEY": config.APP.api.Key,
 				"CST": config.APP.api.CST,
-				"X-SECURITY-TOKEN":config.APP.api.securityToken,
+				"X-SECURITY-TOKEN": config.APP.api.securityToken,
 				"Version": "1"
 			};
 			Ember.$.ajax({
@@ -34,8 +27,10 @@ export default Ember.Controller.extend({
 				async: false,
 				mimeType: req.binary ? 'text/plain; charset=x-user-defined' : null
 			}).then(function(response, status, data) {
-				var ID = response.accounts[0].accountId
-				Ember.set(that.get('account'), 'ID', ID);
+				console.log(response);
+				for (var i = 0; i < response.accounts.length; i++) {
+					that.get('results').addObject(response.accounts[i]);
+				}
 			}, function(e) {
 				console.log(e);
 			});
