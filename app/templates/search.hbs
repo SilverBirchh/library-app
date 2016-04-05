@@ -1,24 +1,64 @@
 {{#if isLoggedIn}}
-<h1>Trading hub for {{activeAccount}}</h1>
-<div class="btn-toolbar">
-  {{#link-to 'search.account' tagName="button" class="btn btn-primary dropdown-toggle" }}My Account{{/link-to}}
-  {{#link-to 'search.positions' tagName="button" class="btn btn-primary dropdown-toggle" }}Open Positions{{/link-to}}
-  {{#link-to 'search.markets' tagName="button" class="btn btn-primary dropdown-toggle"  }}Search and Deal{{/link-to}}
-</div>
-<div class="container">
-  {{outlet}}
-</div>
-<hr>
-<div class="alert alert-info text-center" role="alert">
-  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  <strong>Welcome back!</strong> We hope that you enjoy using our platform.
-</div>
-<div class="alert alert-info text-center" role="alert">
-  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-  <strong>Navigate</strong> through the platform using the sections above.
-</div>
+  <div class="panel panel-primary">
+    <div class="panel-body">
+      <h1>Trading Hub for {{activeAccount}}</h1>
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>
+              Equity:
+            </td>
+            <td>
+              <strong>£{{account.EQUITY}}</strong>
+            </td>
+            <td>
+              Profit / Loss:
+            </td>
+            <td>
+              <strong>£{{account.PNL}}</strong>
+            </td>
+            <td>
+              Funds:
+            </td>
+            <td>
+              <strong>£{{account.FUNDS}}</strong>
+            </td>
+            <td>
+              Margin:
+            </td>
+            <td>
+              <strong>£{{account.MARGIN}}</strong>
+            </td>
+            <td>
+              Avaliable to Deal:
+            </td>
+            <td>
+              <strong>£{{account.AVAILABLE_TO_DEAL}}</strong>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="btn-toolbar">
+    {{#link-to 'search.account' tagName="button" class="btn btn-primary dropdown-toggle" }}My Account{{/link-to}}
+    {{#link-to 'search.positions' tagName="button" class="btn btn-primary dropdown-toggle" }}Open Positions{{/link-to}}
+    {{#link-to 'search.markets' tagName="button" class="btn btn-primary dropdown-toggle" }}Search and Deal{{/link-to}}
+  </div>
+  <div class="container">
+    {{outlet}}
+  </div>
+  <hr>
+  <div class="alert alert-info text-center" role="alert">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>Welcome back!</strong> We hope that you enjoy using our platform.
+  </div>
+  <div class="alert alert-info text-center" role="alert">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong>Navigate</strong> through the platform using the sections above.
+  </div>
 {{else}}
-<div class="alert alert-danger text-center" role="alert">
-  <strong>Please log in to view this page.</strong>
-</div>
+  <div class="alert alert-danger text-center" role="alert">
+    <strong>Please log in to view this page.</strong>
+  </div>
 {{/if}}
