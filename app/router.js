@@ -27,6 +27,7 @@ Router.map(function() {
     this.route('markets');
     this.route('positions');
     this.route('account');
+    this.route('orders');
   });
 });
 

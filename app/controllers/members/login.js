@@ -5,17 +5,17 @@ export default Ember.Controller.extend({
 
   username: '',
   password: '',
-  api: '',
+  api: localStorage.getItem('apikey') || '',
   hasResponseMessage: false,
-  apiKey: '',
 
   validUsername: Ember.computed.gte('username.length', 5),
   validapi: Ember.computed.gte('api.length', 15),
   validPassword: Ember.computed.match('password', /^[a-zA-Z]\w{3,14}$/),
 
   isValid: Ember.computed.and('validUsername', 'validPassword'),
+  validWithApi : Ember.computed.and('isValid', 'validapi'),
 
-  isDisabled: Ember.computed.not('isValid'),
+  isDisabled: Ember.computed.not('validWithApi'),
 
   actions: {
 
@@ -24,6 +24,7 @@ export default Ember.Controller.extend({
       var apiKey = this.get('api');
       config.APP.api.Key = apiKey;
       sessionStorage.setItem('apikey', config.APP.api.Key);
+      localStorage.setItem('apikey', config.APP.api.Key);
       var identifier = this.get('username');
       var password = this.get('password');
       let that = this;
