@@ -15,7 +15,7 @@ export default Ember.Controller.extend(findIndex, findClass, {
 		search() {
 			const that = this;
 			let search = this.get('market').replace(/[^\w\s]/gi, '');
-			
+
 			var req = {};
 			req.method = "GET";
 			req.url = "https://demo-api.ig.com/gateway/deal/markets?searchTerm=" + search;
@@ -106,6 +106,11 @@ export default Ember.Controller.extend(findIndex, findClass, {
 				});
 				config.APP.api.lsClient.subscribe(subscription);
 			});
+		},
+		moveToDeal(result) {
+			var controller = this.controllerFor('search/markets/deal');
+			controller.send('setMarketDetails', result);
+			this.transitionToRoute('/search/markets/deal');
 		}
 	}
 });

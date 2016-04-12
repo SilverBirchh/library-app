@@ -24,7 +24,9 @@ Router.map(function() {
     this.route('sign-up');
   });
   this.route('search', function() {
-    this.route('markets');
+    this.route('markets', function() {
+      this.route('deal');
+    });
     this.route('positions');
     this.route('account');
     this.route('orders');

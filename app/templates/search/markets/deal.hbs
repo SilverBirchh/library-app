@@ -1,0 +1,43 @@
+<div class="container col-lg-3 pull-right">
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<h3 class="panel-title">Deal - {{result.instrumentName}} - {{result.expiry}}</h3>
+		</div>
+		<div class="panel-body">
+			<button id='sell' {{action 'decideDirection' 'sell'}} type="button" class="btn btn-default btn-lg">
+				<p>
+					Sell
+				</p>
+				<p>
+					{{result.bid}}
+				</p>
+			</button>
+			<button id='buy' {{action 'decideDirection' 'buy'}} type="button" class="btn btn-default btn-lg pull-right">
+				<p>
+					Buy
+				</p>
+				<p>
+					{{result.offer}}
+				</p>
+			</button>
+		</div>
+		<div class="input-group">
+			<span class="input-group-addon">Size</span>
+			{{input class="form-control" value=min type="number"}}
+		</div>
+		<div class="input-group">
+			<span class="input-group-addon">Currency</span>
+			<select class="form-control">
+				<option>GDP</option>
+				<option>USD</option>
+			</select>
+		</div>
+		<hr />
+		<div class="panel-footer text-center">
+		<div class="btn-group text-center" role="group" aria-label="...">
+			<button type="button" class="btn btn-default btn-lg">Cancel</button>
+			<button id='dealButton' type="button" class="btn btn-success btn-lg" disabled={{isDisabled}} {{action 'deal'}}>Deal</button>
+		</div>
+	</div>
+	</div>
+</div>

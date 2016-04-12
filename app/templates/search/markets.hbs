@@ -15,7 +15,8 @@
 		<!-- /.col-lg-6 -->
 	</div>
 	<hr>
-	<div class="container col-lg-12">
+	{{outlet}}
+	<div class="container col-lg-8">
 		<table class="table table-hover" id="search_results_list">
 			<thead>
 				<tr>
@@ -32,8 +33,8 @@
 						<td>
 							<img id= {{result.linkIdState}} src= {{result.state}} />
 						</td>
-						<td id= {{result.linkIdEpic}}>
-							{{result.instrumentName}}
+						<td id= {{result.linkIdEpic}} {{action 'moveToDeal' result}}>
+							<a href="#">{{result.instrumentName}}</a>
 						</td>
 						<td>
 							{{result.tidyExpiry}}
@@ -46,7 +47,7 @@
 						</td>
 					</tr>
 					{{else}}
-						<td colspan="5" class="alert alert-warning col-sm-12 text-center">
+						<td colspan="5" class="alert alert-warning col-sm-8 text-center">
 							No markets here.
 						</td>
 				{{/each}}
